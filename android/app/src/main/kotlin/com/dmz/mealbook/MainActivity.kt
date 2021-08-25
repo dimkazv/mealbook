@@ -1,4 +1,4 @@
-package com.backer_stream.template_bloc
+package com.dmz.mealbook
 
 import io.flutter.embedding.android.FlutterActivity
 

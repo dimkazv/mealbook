@@ -1,8 +1,8 @@
 import 'package:dio/dio.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
-import 'package:template_bloc/common/bloc/error_handler_bloc/error_handler_event.dart';
-import 'package:template_bloc/common/bloc/error_handler_bloc/error_handler_state.dart';
-import 'package:template_bloc/common/logger/logger.dart';
+import 'package:mealbook/common/bloc/error_handler_bloc/error_handler_event.dart';
+import 'package:mealbook/common/bloc/error_handler_bloc/error_handler_state.dart';
+import 'package:mealbook/common/logger/logger.dart';
 
 class ErrorHandlerBloc extends Bloc<ErrorHandlerEvent, ErrorHandlerState> {
   ErrorHandlerBloc(this._logger) : super(InitialErrorHandlerState());

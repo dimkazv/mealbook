@@ -1,8 +1,8 @@
 import 'package:flutter/material.dart';
-import 'package:template_bloc/common/ui/app_colors.dart';
-import 'package:template_bloc/common/widgets/custom_bottom_navigation_bar.dart';
-import 'package:template_bloc/common/widgets/custom_radio_button.dart';
-import 'package:template_bloc/common/widgets/recipe_card.dart';
+import 'package:mealbook/common/ui/app_colors.dart';
+import 'package:mealbook/common/widgets/custom_bottom_navigation_bar.dart';
+import 'package:mealbook/common/widgets/custom_radio_button.dart';
+import 'package:mealbook/common/widgets/recipe_card.dart';
 
 class HomePage extends StatelessWidget {
   const HomePage({Key? key}) : super(key: key);

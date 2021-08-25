@@ -1,5 +1,5 @@
 import 'package:flutter/material.dart';
-import 'package:template_bloc/common/ui/app_colors.dart';
+import 'package:mealbook/common/ui/app_colors.dart';
 
 class CustomRadioButton<T> extends StatelessWidget {
   const CustomRadioButton({

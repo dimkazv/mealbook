@@ -1,4 +1,4 @@
-import 'package:template_bloc/common/logger/logger.dart';
+import 'package:mealbook/common/logger/logger.dart';
 
 class ProductionLogger extends Logger {
   @override

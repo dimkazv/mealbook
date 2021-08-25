@@ -1,5 +1,5 @@
-import 'package:template_bloc/common/env/debug_options.dart';
-import 'package:template_bloc/common/logger/logger.dart';
+import 'package:mealbook/common/env/debug_options.dart';
+import 'package:mealbook/common/logger/logger.dart';
 
 class Config {
   Config({

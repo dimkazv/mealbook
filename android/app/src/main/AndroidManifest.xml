@@ -1,5 +1,5 @@
 <manifest xmlns:android="http://schemas.android.com/apk/res/android"
-    package="com.backer_stream.template_bloc">
+    package="com.dmz.mealbook">
    <application
         android:label="template_bloc"
         android:icon="@mipmap/ic_launcher">

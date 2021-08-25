@@ -1,8 +1,8 @@
 import 'dart:ui';
 
 import 'package:flutter/material.dart';
-import 'package:template_bloc/common/ui/app_assets.dart';
-import 'package:template_bloc/common/ui/app_colors.dart';
+import 'package:mealbook/common/ui/app_assets.dart';
+import 'package:mealbook/common/ui/app_colors.dart';
 
 class RecipeCard extends StatelessWidget {
   const RecipeCard({Key? key}) : super(key: key);

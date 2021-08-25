@@ -2,10 +2,10 @@ import 'package:bloc_test/bloc_test.dart';
 import 'package:dio/dio.dart';
 import 'package:flutter_test/flutter_test.dart';
 import 'package:mockito/mockito.dart';
-import 'package:template_bloc/common/bloc/error_handler_bloc/error_handler_bloc.dart';
-import 'package:template_bloc/common/bloc/error_handler_bloc/error_handler_event.dart';
-import 'package:template_bloc/common/bloc/error_handler_bloc/error_handler_state.dart';
-import 'package:template_bloc/common/logger/logger.dart';
+import 'package:mealbook/common/bloc/error_handler_bloc/error_handler_bloc.dart';
+import 'package:mealbook/common/bloc/error_handler_bloc/error_handler_event.dart';
+import 'package:mealbook/common/bloc/error_handler_bloc/error_handler_state.dart';
+import 'package:mealbook/common/logger/logger.dart';
 
 class MockLogger extends Mock implements Logger {}
 

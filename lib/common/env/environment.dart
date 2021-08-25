@@ -1,4 +1,4 @@
-import 'package:template_bloc/common/env/build_types.dart';
+import 'package:mealbook/common/env/build_types.dart';
 
 class Environment<T> {
   Environment._({required this.config, BuildType? buildType})

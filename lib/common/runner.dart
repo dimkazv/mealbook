@@ -1,7 +1,7 @@
 import 'dart:async';
 
 import 'package:flutter/material.dart';
-import 'package:template_bloc/app.dart';
+import 'package:mealbook/app.dart';
 
 Future<void> run() async {
   WidgetsFlutterBinding.ensureInitialized();

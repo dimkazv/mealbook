@@ -1,8 +1,8 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_svg/flutter_svg.dart';
-import 'package:template_bloc/common/routes.dart';
-import 'package:template_bloc/common/ui/app_assets.dart';
-import 'package:template_bloc/common/ui/app_colors.dart';
+import 'package:mealbook/common/routes.dart';
+import 'package:mealbook/common/ui/app_assets.dart';
+import 'package:mealbook/common/ui/app_colors.dart';
 
 enum CustomBottomBarSelectedPage { home, favorites, shoppingList }
 

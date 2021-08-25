@@ -1,8 +1,8 @@
 import 'package:flutter/material.dart';
 import 'package:flutter/services.dart';
-import 'package:template_bloc/common/routes.dart';
-import 'package:template_bloc/home/home_page.dart';
-import 'package:template_bloc/intro/intro_page.dart';
+import 'package:mealbook/common/routes.dart';
+import 'package:mealbook/home/home_page.dart';
+import 'package:mealbook/intro/intro_page.dart';
 
 class RoutesFactory {
   static String get initialRoute => Routes.intro;

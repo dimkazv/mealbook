@@ -1,9 +1,9 @@
 import 'package:flutter/material.dart';
-import 'package:template_bloc/common/env/config.dart';
-import 'package:template_bloc/common/env/debug_options.dart';
-import 'package:template_bloc/common/env/environment.dart';
-import 'package:template_bloc/common/routes_factory.dart';
-import 'package:template_bloc/common/ui/themes.dart';
+import 'package:mealbook/common/env/config.dart';
+import 'package:mealbook/common/env/debug_options.dart';
+import 'package:mealbook/common/env/environment.dart';
+import 'package:mealbook/common/routes_factory.dart';
+import 'package:mealbook/common/ui/themes.dart';
 import 'package:flutter_gen/gen_l10n/app_localizations.dart';
 
 class App extends StatelessWidget {

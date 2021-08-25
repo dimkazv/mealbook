@@ -1,8 +1,8 @@
 import 'package:flutter/material.dart';
 import 'package:slide_to_confirm/slide_to_confirm.dart';
-import 'package:template_bloc/common/routes.dart';
-import 'package:template_bloc/common/ui/app_assets.dart';
-import 'package:template_bloc/common/ui/app_colors.dart';
+import 'package:mealbook/common/routes.dart';
+import 'package:mealbook/common/ui/app_assets.dart';
+import 'package:mealbook/common/ui/app_colors.dart';
 
 class IntroPage extends StatelessWidget {
   const IntroPage({Key? key}) : super(key: key);
