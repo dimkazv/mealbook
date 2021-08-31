@@ -7,11 +7,14 @@ class HomeSliverSearchHeader extends SliverPersistentHeaderDelegate {
   const HomeSliverSearchHeader({
     required String queryText,
     required void Function() onTapSearch,
+    required void Function() onTapClear,
   })  : _queryText = queryText,
-        _onTapSearch = onTapSearch;
+        _onTapSearch = onTapSearch,
+        _onTapClear = onTapClear;
 
   final String _queryText;
   final void Function() _onTapSearch;
+  final void Function() _onTapClear;
 
   @override
   Widget build(
@@ -82,7 +85,20 @@ class HomeSliverSearchHeader extends SliverPersistentHeaderDelegate {
                             fontWeight: FontWeight.w500,
                             color: AppColors.textFaded,
                           ),
-                        )
+                        ),
+                        const Spacer(),
+                        if (_queryText.isNotEmpty)
+                          Padding(
+                            padding: const EdgeInsets.only(left: 16, right: 8),
+                            child: IconButton(
+                              onPressed: _onTapClear,
+                              icon: const Icon(
+                                Icons.close,
+                                color: AppColors.accent,
+                                size: 36,
+                              ),
+                            ),
+                          ),
                       ],
                     ),
                   ),

@@ -43,6 +43,10 @@ class HomePage extends StatelessWidget {
     }
   }
 
+  Future<void> _onTapClear(BuildContext context) async {
+    context.read<HomeBloc>().add(const HomeEventSetQuery(query: ''));
+  }
+
   Widget _body(BuildContext context, HomeState state) {
     return SafeArea(
       bottom: false,
@@ -56,6 +60,7 @@ class HomePage extends StatelessWidget {
                 context,
                 query: state.currentQuery,
               ),
+              onTapClear: () => _onTapClear(context),
             ),
           ),
           SliverPadding(
