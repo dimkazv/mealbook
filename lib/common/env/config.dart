@@ -4,11 +4,11 @@ import 'package:mealbook/common/logger/logger.dart';
 class Config {
   Config({
     required this.logger,
-    required this.title,
     required this.debugOptions,
+    required this.apiBaseUrl,
   });
 
   final Logger logger;
-  final String title;
   final DebugOptions debugOptions;
+  final String apiBaseUrl;
 }

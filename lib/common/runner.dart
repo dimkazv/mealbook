@@ -6,7 +6,6 @@ import 'package:mealbook/app.dart';
 Future<void> run() async {
   WidgetsFlutterBinding.ensureInitialized();
 
-  _initLogger();
   _runApp();
 }
 
@@ -16,5 +15,3 @@ void _runApp() {
     (object, stackTrace) {},
   );
 }
-
-void _initLogger() {}

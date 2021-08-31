@@ -1,5 +1,4 @@
 enum BuildType {
   dev,
-  stage,
-  release,
+  production,
 }
