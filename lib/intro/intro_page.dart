@@ -1,5 +1,4 @@
 import 'package:flutter/material.dart';
-import 'package:slide_to_confirm/slide_to_confirm.dart';
 import 'package:mealbook/common/routes.dart';
 import 'package:mealbook/common/ui/app_assets.dart';
 import 'package:mealbook/common/ui/app_colors.dart';
@@ -7,7 +6,7 @@ import 'package:mealbook/common/ui/app_colors.dart';
 class IntroPage extends StatelessWidget {
   const IntroPage({Key? key}) : super(key: key);
 
-  void _onSlideButton(BuildContext context) {
+  void _onTapButton(BuildContext context) {
     Navigator.pushReplacementNamed(context, Routes.home);
   }
 
@@ -22,11 +21,14 @@ class IntroPage extends StatelessWidget {
           ),
         ),
         child: Container(
-          decoration: BoxDecoration(
+          decoration: const BoxDecoration(
             gradient: LinearGradient(
               begin: Alignment.topCenter,
               end: Alignment.bottomCenter,
-              colors: [Colors.transparent, Colors.black.withOpacity(0.9)],
+              colors: [
+                AppColors.imageGradientTransparent,
+                AppColors.imageGradientDark,
+              ],
             ),
           ),
           child: SafeArea(
@@ -34,17 +36,20 @@ class IntroPage extends StatelessWidget {
               crossAxisAlignment: CrossAxisAlignment.stretch,
               mainAxisAlignment: MainAxisAlignment.end,
               children: [
-                const Text(
-                  'Cooking Experience Like a Chief',
-                  textAlign: TextAlign.center,
-                  style: TextStyle(
-                    color: AppColors.primary,
-                    fontSize: 36,
-                    fontWeight: FontWeight.bold,
+                const Padding(
+                  padding: EdgeInsets.symmetric(horizontal: 16),
+                  child: Text(
+                    'Cooking Experience Like a Chief',
+                    textAlign: TextAlign.center,
+                    style: TextStyle(
+                      color: AppColors.primary,
+                      fontSize: 36,
+                      fontWeight: FontWeight.bold,
+                    ),
                   ),
                 ),
                 const Padding(
-                  padding: EdgeInsets.fromLTRB(48, 24, 48, 56),
+                  padding: EdgeInsets.fromLTRB(48, 24, 48, 48),
                   child: Text(
                     "Let's make a delicious dish with the best recipe for you",
                     textAlign: TextAlign.center,
@@ -56,21 +61,27 @@ class IntroPage extends StatelessWidget {
                 ),
                 Padding(
                   padding: const EdgeInsets.fromLTRB(64, 0, 64, 36),
-                  child: ConfirmationSlider(
-                    onConfirmation: () => _onSlideButton(context),
-                    text: 'Get started',
-                    textStyle: const TextStyle(
-                      color: AppColors.primary,
-                      fontSize: 18,
-                      fontWeight: FontWeight.bold,
+                  child: ElevatedButton(
+                    onPressed: () => _onTapButton(context),
+                    style: ButtonStyle(
+                      backgroundColor:
+                          MaterialStateProperty.all(AppColors.accent),
+                      shape: MaterialStateProperty.all(
+                        RoundedRectangleBorder(
+                          borderRadius: BorderRadius.circular(32),
+                        ),
+                      ),
                     ),
-                    backgroundColor: AppColors.accent,
-                    width: 250,
-                    foregroundColor: AppColors.primary,
-                    sliderButtonContent: const Icon(
-                      Icons.double_arrow_rounded,
-                      color: AppColors.accent,
-                      size: 35,
+                    child: const Padding(
+                      padding: EdgeInsets.all(16.0),
+                      child: Text(
+                        'Get started',
+                        style: TextStyle(
+                          color: AppColors.primary,
+                          fontSize: 18,
+                          fontWeight: FontWeight.bold,
+                        ),
+                      ),
                     ),
                   ),
                 ),
