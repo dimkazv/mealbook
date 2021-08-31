@@ -3,44 +3,44 @@ import 'package:mealbook/common/ui/app_colors.dart';
 
 class CustomRadioButton<T> extends StatelessWidget {
   const CustomRadioButton({
-    required this.value,
-    required this.groupValue,
-    required this.onChanged,
-    required this.leading,
+    required T value,
+    required T groupValue,
+    required ValueChanged<T?> onChanged,
+    required String leading,
     Key? key,
-  }) : super(key: key);
+  })  : _value = value,
+        _leading = leading,
+        _onChanged = onChanged,
+        _isSelected = value == groupValue,
+        super(key: key);
 
-  final T value;
-  final T groupValue;
-  final String leading;
-  final ValueChanged<T?> onChanged;
+  final T _value;
+  final String _leading;
+  final ValueChanged<T?> _onChanged;
+  final bool _isSelected;
 
   @override
   Widget build(BuildContext context) {
-    return InkWell(
-      onTap: () => onChanged(value),
-      child: SizedBox(
-        height: 64,
-        child: _customRadioButton,
-      ),
-    );
-  }
-
-  Widget get _customRadioButton {
-    final isSelected = value == groupValue;
-    return Container(
-      padding: const EdgeInsets.symmetric(horizontal: 24, vertical: 18),
-      decoration: BoxDecoration(
-        color: isSelected ? AppColors.accent : AppColors.primary,
+    return Material(
+      color: _isSelected ? AppColors.accent : AppColors.primary,
+      borderRadius: BorderRadius.circular(16),
+      child: InkWell(
+        onTap: () => _onChanged(_value),
         borderRadius: BorderRadius.circular(16),
-      ),
-      child: Center(
-        child: Text(
-          leading,
-          style: TextStyle(
-            color: isSelected ? AppColors.primary : AppColors.textFaded,
-            fontWeight: FontWeight.bold,
-            fontSize: 18,
+        child: Padding(
+          padding: const EdgeInsets.symmetric(horizontal: 24, vertical: 18),
+          child: SizedBox(
+            height: 64,
+            child: Center(
+              child: Text(
+                _leading,
+                style: TextStyle(
+                  color: _isSelected ? AppColors.primary : AppColors.textFaded,
+                  fontWeight: FontWeight.bold,
+                  fontSize: 18,
+                ),
+              ),
+            ),
           ),
         ),
       ),
