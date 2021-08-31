@@ -23,10 +23,7 @@ class HomeRepository {
               id: meal.id,
               title: meal.title,
               imageUrl: meal.imageUrl,
-              category: meal.category,
-              area: meal.area,
               instructions: meal.instructions,
-              videoLink: meal.videoLink,
               ingredients: meal.ingredients
                   .where((i) => i != null && i.isNotEmpty)
                   .cast<String>()
@@ -54,10 +51,7 @@ class HomeRepository {
               id: meal.id,
               title: meal.title,
               imageUrl: meal.imageUrl,
-              category: meal.category,
-              area: meal.area,
               instructions: meal.instructions,
-              videoLink: meal.videoLink,
               ingredients: meal.ingredients
                   .where((i) => i != null && i.isNotEmpty)
                   .cast<String>()
