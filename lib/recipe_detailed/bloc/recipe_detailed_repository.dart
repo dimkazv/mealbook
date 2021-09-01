@@ -8,7 +8,7 @@ class RecipeDetailedRepository {
 
   final DioUtils _dioUtils;
 
-  Future<MealUi> getById({required int id}) async {
+  Future<MealUi> getById({required String id}) async {
     final response = await _dioUtils.getQuery<Map<String, dynamic>>(
       ApiRoutes.recipesById,
       queryParameters: <String, dynamic>{'i': id},
@@ -18,21 +18,6 @@ class RecipeDetailedRepository {
 
     final meals = searchResponse.meals ?? [];
 
-    return meals
-        .map((meal) => MealUi(
-              id: meal.id,
-              title: meal.title,
-              imageUrl: meal.imageUrl,
-              instructions: meal.instructions,
-              ingredients: meal.ingredients
-                  .where((i) => i != null && i.isNotEmpty)
-                  .cast<String>()
-                  .toList(),
-              measures: meal.measures
-                  .where((m) => m != null && m.isNotEmpty)
-                  .cast<String>()
-                  .toList(),
-            ))
-        .first;
+    return meals.first.toUi;
   }
 }

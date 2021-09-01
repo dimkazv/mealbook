@@ -8,7 +8,7 @@ class HomeRepository {
 
   final DioUtils _dioUtils;
 
-  Future<List<MealUi>> searchByQuery({required String query}) async {
+  Future<List<MealUi>> searchByQuery({String query = ''}) async {
     final response = await _dioUtils.getQuery<Map<String, dynamic>>(
       ApiRoutes.recipesByQuery,
       queryParameters: <String, dynamic>{'s': query},
@@ -18,22 +18,7 @@ class HomeRepository {
 
     final meals = searchResponse.meals ?? [];
 
-    return meals
-        .map((meal) => MealUi(
-              id: meal.id,
-              title: meal.title,
-              imageUrl: meal.imageUrl,
-              instructions: meal.instructions,
-              ingredients: meal.ingredients
-                  .where((i) => i != null && i.isNotEmpty)
-                  .cast<String>()
-                  .toList(),
-              measures: meal.measures
-                  .where((m) => m != null && m.isNotEmpty)
-                  .cast<String>()
-                  .toList(),
-            ))
-        .toList();
+    return meals.map((meal) => meal.toUi).toList();
   }
 
   Future<List<MealUi>> searchByCategory({required String category}) async {
@@ -46,21 +31,6 @@ class HomeRepository {
 
     final meals = searchResponse.meals ?? [];
 
-    return meals
-        .map((meal) => MealUi(
-              id: meal.id,
-              title: meal.title,
-              imageUrl: meal.imageUrl,
-              instructions: meal.instructions,
-              ingredients: meal.ingredients
-                  .where((i) => i != null && i.isNotEmpty)
-                  .cast<String>()
-                  .toList(),
-              measures: meal.measures
-                  .where((m) => m != null && m.isNotEmpty)
-                  .cast<String>()
-                  .toList(),
-            ))
-        .toList();
+    return meals.map((meal) => meal.toUi).toList();
   }
 }

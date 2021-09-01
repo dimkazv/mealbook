@@ -11,7 +11,7 @@ import 'package:mealbook/common/ui/widgets/recipe_card.dart';
 import 'package:mealbook/home/bloc/home_bloc.dart';
 import 'package:mealbook/home/bloc/home_event.dart';
 import 'package:mealbook/home/bloc/home_state.dart';
-import 'package:mealbook/home/models/recipe_type.dart';
+import 'package:mealbook/home/models/recipe_category.dart';
 import 'package:mealbook/home/widgets/sliver_delegate.dart';
 import 'package:mealbook/home/widgets/home_sliver_search_header.dart';
 import 'package:shimmer/shimmer.dart';
@@ -21,11 +21,14 @@ class HomePage extends StatelessWidget {
 
   final _errorListener = ErrorListener();
 
-  void _onTapRadioButton(BuildContext context, {required int typeIndex}) {
-    context.read<HomeBloc>().add(HomeEventSetCategory(typeIndex: typeIndex));
+  void _onTapRadioButton(
+    BuildContext context, {
+    required RecipeCategoryEnum category,
+  }) {
+    context.read<HomeBloc>().add(HomeFetchedByCategory(category: category));
   }
 
-  void _onTapRecipe(BuildContext context, {required int id}) {
+  void _onTapRecipe(BuildContext context, {required String id}) {
     Navigator.pushNamed(context, Routes.recipeDetailed, arguments: id);
   }
 
@@ -39,12 +42,12 @@ class HomePage extends StatelessWidget {
       arguments: query,
     );
     if ((result as String?) != null) {
-      context.read<HomeBloc>().add(HomeEventSetQuery(query: result!));
+      context.read<HomeBloc>().add(HomeFetchedByQuery(query: result!));
     }
   }
 
   Future<void> _onTapClear(BuildContext context) async {
-    context.read<HomeBloc>().add(const HomeEventSetQuery(query: ''));
+    context.read<HomeBloc>().add(const HomeFetchedByQuery(query: ''));
   }
 
   Widget _body(BuildContext context, HomeState state) {
@@ -72,16 +75,19 @@ class HomePage extends StatelessWidget {
                   padding: const EdgeInsets.symmetric(horizontal: 32),
                   scrollDirection: Axis.horizontal,
                   shrinkWrap: true,
-                  itemCount: RecipeType.lenght,
-                  itemBuilder: (context, index) => CustomRadioButton(
-                    leading: RecipeType.nameByIndex(index),
-                    value: index,
-                    groupValue: state.currentType,
-                    onChanged: (value) => _onTapRadioButton(
-                      context,
-                      typeIndex: index,
-                    ),
-                  ),
+                  itemCount: RecipeCategoryEnum.values.length,
+                  itemBuilder: (context, index) {
+                    final category = RecipeCategoryEnum.values[index];
+                    return CustomRadioButton(
+                      leading: RecipeCategoryHelper.getName(category),
+                      value: category,
+                      groupValue: state.category,
+                      onChanged: (value) => _onTapRadioButton(
+                        context,
+                        category: category,
+                      ),
+                    );
+                  },
                   separatorBuilder: (context, index) =>
                       const SizedBox(width: 8),
                 ),

@@ -39,9 +39,8 @@ class RoutesFactory {
                 BlocProvider(
                   create: (context) => HomeBloc(
                     homeRepository: HomeRepository(_dioUtils),
-                    errorHandlerBloc:
-                        BlocProvider.of<ErrorHandlerBloc>(context),
-                  )..add(HomeEventInitial()),
+                    errorHandlerBloc: context.read<ErrorHandlerBloc>(),
+                  )..add(HomeInitial()),
                 ),
               ],
               child: AnnotatedRegion<SystemUiOverlayStyle>(
@@ -57,14 +56,14 @@ class RoutesFactory {
           );
         },
         Routes.recipeDetailed: (context) {
-          final args = ModalRoute.of(context)!.settings.arguments as int;
+          final args = ModalRoute.of(context)!.settings.arguments as String;
           return MultiBlocProvider(
             providers: [
               BlocProvider(create: (context) => ErrorHandlerBloc(_logger)),
               BlocProvider(
                 create: (context) => RecipeDetailedBloc(
                   recipeDetailedRepository: RecipeDetailedRepository(_dioUtils),
-                  errorHandlerBloc: BlocProvider.of<ErrorHandlerBloc>(context),
+                  errorHandlerBloc: context.read<ErrorHandlerBloc>(),
                 )..add(RecipeDetailedEventInitial(id: args)),
               ),
             ],

@@ -10,7 +10,7 @@ class MealUi extends Equatable {
     required this.measures,
   });
 
-  final int id;
+  final String id;
 
   final String title;
 

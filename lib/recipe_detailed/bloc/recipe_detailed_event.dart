@@ -10,7 +10,7 @@ abstract class RecipeDetailedEvent extends Equatable {
 class RecipeDetailedEventInitial extends RecipeDetailedEvent {
   const RecipeDetailedEventInitial({required this.id});
 
-  final int id;
+  final String id;
 
   @override
   List<Object> get props => [id];

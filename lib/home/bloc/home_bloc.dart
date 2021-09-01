@@ -7,7 +7,7 @@ import 'package:mealbook/common/models/meal_ui.dart';
 import 'package:mealbook/home/bloc/home_event.dart';
 import 'package:mealbook/home/bloc/home_repository.dart';
 import 'package:mealbook/home/bloc/home_state.dart';
-import 'package:mealbook/home/models/recipe_type.dart';
+import 'package:mealbook/home/models/recipe_category.dart';
 
 class HomeBloc extends Bloc<HomeEvent, HomeState> {
   HomeBloc({
@@ -23,46 +23,35 @@ class HomeBloc extends Bloc<HomeEvent, HomeState> {
 
   final Set<MealUi> _recipes = {};
 
-  String _query = '';
-
-  int _typeIndex = 0;
-
   @override
   Stream<HomeState> mapEventToState(
     HomeEvent event,
   ) async* {
-    if (event is HomeEventInitial) {
-      yield* _mapHomeEventInitial(event);
-    } else if (event is HomeEventSetQuery) {
-      yield* _mapHomeEventSetQuery(event);
-    } else if (event is HomeEventSetCategory) {
-      yield* _mapHomeEventSetCategory(event);
+    if (event is HomeInitial) {
+      yield* _mapHomeInitial(event);
+    } else if (event is HomeFetchedByQuery) {
+      yield* _mapHomeFetchedByQuery(event);
+    } else if (event is HomeFetchedByCategory) {
+      yield* _mapHomeFetchedByCategory(event);
     }
   }
 
-  Stream<HomeState> _mapHomeEventInitial(HomeEventInitial event) async* {
+  Stream<HomeState> _mapHomeInitial(HomeInitial event) async* {
     try {
-      final mealUi = await _homeRepository.searchByQuery(query: _query);
+      final mealUi = await _homeRepository.searchByQuery();
 
       _recipes.addAll(mealUi);
 
-      yield HomeState.update(
-        recipes: _recipes.toList(),
-        currentQuery: _query,
-        currentType: _typeIndex,
-      );
+      yield HomeState.update(recipes: _recipes.toList());
     } on Exception catch (e, s) {
       _errorHandlerBloc.add(HandleErrorEvent(e, s));
       yield const HomeState.error();
     }
   }
 
-  Stream<HomeState> _mapHomeEventSetQuery(HomeEventSetQuery event) async* {
+  Stream<HomeState> _mapHomeFetchedByQuery(HomeFetchedByQuery event) async* {
     try {
-      _query = event.query;
-      _typeIndex = 0;
-
-      final mealUi = await _homeRepository.searchByQuery(query: _query);
+      final mealUi = await _homeRepository.searchByQuery(query: event.query);
 
       _recipes
         ..clear()
@@ -70,8 +59,7 @@ class HomeBloc extends Bloc<HomeEvent, HomeState> {
 
       yield HomeState.update(
         recipes: _recipes.toList(),
-        currentQuery: _query,
-        currentType: _typeIndex,
+        currentQuery: event.query,
       );
     } on Exception catch (e, s) {
       _errorHandlerBloc.add(HandleErrorEvent(e, s));
@@ -79,20 +67,17 @@ class HomeBloc extends Bloc<HomeEvent, HomeState> {
     }
   }
 
-  Stream<HomeState> _mapHomeEventSetCategory(
-      HomeEventSetCategory event) async* {
+  Stream<HomeState> _mapHomeFetchedByCategory(
+    HomeFetchedByCategory event,
+  ) async* {
     try {
-      _typeIndex = event.typeIndex;
-      _query = '';
-
-      final type = RecipeType.typeByIndex(_typeIndex);
-
       List<MealUi> mealUi;
 
-      if (type != null) {
-        mealUi = await _homeRepository.searchByCategory(category: type);
+      if (event.category != RecipeCategoryEnum.any) {
+        final category = RecipeCategoryHelper.getName(event.category);
+        mealUi = await _homeRepository.searchByCategory(category: category);
       } else {
-        mealUi = await _homeRepository.searchByQuery(query: _query);
+        mealUi = await _homeRepository.searchByQuery();
       }
 
       _recipes
@@ -101,8 +86,7 @@ class HomeBloc extends Bloc<HomeEvent, HomeState> {
 
       yield HomeState.update(
         recipes: _recipes.toList(),
-        currentQuery: _query,
-        currentType: _typeIndex,
+        category: event.category,
       );
     } on Exception catch (e, s) {
       _errorHandlerBloc.add(HandleErrorEvent(e, s));

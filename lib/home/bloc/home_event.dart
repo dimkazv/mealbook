@@ -1,4 +1,5 @@
 import 'package:equatable/equatable.dart';
+import 'package:mealbook/home/models/recipe_category.dart';
 
 abstract class HomeEvent extends Equatable {
   const HomeEvent();
@@ -7,10 +8,10 @@ abstract class HomeEvent extends Equatable {
   List<Object> get props => [];
 }
 
-class HomeEventInitial extends HomeEvent {}
+class HomeInitial extends HomeEvent {}
 
-class HomeEventSetQuery extends HomeEvent {
-  const HomeEventSetQuery({required this.query});
+class HomeFetchedByQuery extends HomeEvent {
+  const HomeFetchedByQuery({required this.query});
 
   final String query;
 
@@ -18,11 +19,11 @@ class HomeEventSetQuery extends HomeEvent {
   List<Object> get props => [query];
 }
 
-class HomeEventSetCategory extends HomeEvent {
-  const HomeEventSetCategory({required this.typeIndex});
+class HomeFetchedByCategory extends HomeEvent {
+  const HomeFetchedByCategory({required this.category});
 
-  final int typeIndex;
+  final RecipeCategoryEnum category;
 
   @override
-  List<Object> get props => [typeIndex];
+  List<Object> get props => [category];
 }

@@ -1,5 +1,6 @@
 import 'package:equatable/equatable.dart';
 import 'package:json_annotation/json_annotation.dart';
+import 'package:mealbook/common/models/meal_ui.dart';
 
 part 'meal_response.g.dart';
 
@@ -58,8 +59,8 @@ class MealResponse extends Equatable {
   factory MealResponse.fromJson(Map<String, dynamic> json) =>
       _$MealResponseFromJson(json);
 
-  @JsonKey(name: 'idMeal', fromJson: _idFromJson)
-  final int id;
+  @JsonKey(name: 'idMeal')
+  final String id;
 
   @JsonKey(name: 'strMeal')
   final String title;
@@ -121,11 +122,22 @@ class MealResponse extends Equatable {
   final String? strMeasure19;
   final String? strMeasure20;
 
-  static int _idFromJson(String json) {
-    return int.parse(json);
-  }
+  MealUi get toUi => MealUi(
+        id: id,
+        title: title,
+        imageUrl: imageUrl,
+        instructions: instructions,
+        ingredients: _ingredients
+            .where((i) => i != null && i.isNotEmpty)
+            .cast<String>()
+            .toList(),
+        measures: _measures
+            .where((m) => m != null && m.isNotEmpty)
+            .cast<String>()
+            .toList(),
+      );
 
-  List<String?> get ingredients => [
+  List<String?> get _ingredients => [
         strIngredient1,
         strIngredient2,
         strIngredient3,
@@ -148,7 +160,7 @@ class MealResponse extends Equatable {
         strIngredient20,
       ];
 
-  List<String?> get measures => [
+  List<String?> get _measures => [
         strMeasure1,
         strMeasure2,
         strMeasure3,

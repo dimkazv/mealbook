@@ -12,7 +12,6 @@ dependencies:
   dio: 4.0.0
   equatable: 2.0.3
   flutter_bloc: 7.2.0
-  flutter_svg: 0.22.0
   json_annotation: 4.0.1
   cached_network_image: 3.1.0
   shared_preferences: 2.0.6
@@ -31,7 +30,6 @@ dev_dependencies:
 
 flutter:
   uses-material-design: true
-  generate: true
   assets:
     - res/assets/
     - res/fonts/
@@ -58,3 +56,9 @@ fonts:
         weight: 800
       - asset: res/fonts/Roboto-Black.ttf
         weight: 900
+
+flutter_icons:
+  image_path: "res/assets/app_icon.png"
+  android: true
+  ios: true
+ 

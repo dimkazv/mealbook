@@ -5,7 +5,7 @@ class CustomRadioButton<T> extends StatelessWidget {
   const CustomRadioButton({
     required T value,
     required T groupValue,
-    required ValueChanged<T?> onChanged,
+    required ValueChanged<T> onChanged,
     required String leading,
     Key? key,
   })  : _value = value,
@@ -16,7 +16,7 @@ class CustomRadioButton<T> extends StatelessWidget {
 
   final T _value;
   final String _leading;
-  final ValueChanged<T?> _onChanged;
+  final ValueChanged<T> _onChanged;
   final bool _isSelected;
 
   @override

@@ -1,5 +1,6 @@
 import 'package:equatable/equatable.dart';
 import 'package:mealbook/common/models/meal_ui.dart';
+import 'package:mealbook/home/models/recipe_category.dart';
 
 enum HomeStateStatus { initial, update, error }
 
@@ -8,20 +9,20 @@ class HomeState extends Equatable {
     required this.status,
     this.recipes,
     this.currentQuery = '',
-    this.currentType = 0,
+    this.category = RecipeCategoryEnum.any,
   });
 
   const HomeState.initial() : this._(status: HomeStateStatus.initial);
 
   const HomeState.update({
     required List<MealUi> recipes,
-    required String currentQuery,
-    required int currentType,
+    RecipeCategoryEnum category = RecipeCategoryEnum.any,
+    String currentQuery = '',
   }) : this._(
           status: HomeStateStatus.update,
           recipes: recipes,
           currentQuery: currentQuery,
-          currentType: currentType,
+          category: category,
         );
 
   const HomeState.error() : this._(status: HomeStateStatus.error);
@@ -29,12 +30,13 @@ class HomeState extends Equatable {
   final HomeStateStatus status;
   final List<MealUi>? recipes;
   final String currentQuery;
-  final int currentType;
+  final RecipeCategoryEnum category;
 
   @override
   List<Object?> get props => [
         status,
         recipes,
-        currentType,
+        currentQuery,
+        category,
       ];
 }
